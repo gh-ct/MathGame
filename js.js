@@ -4,11 +4,18 @@ const btn2 = document.querySelector(".btn2");
 const btn3 = document.querySelector(".btn3");
 
 let btn_array = [];
-let opr_array = ["+","-","*","/"];
+let opr_array = ["+","-","*","/"]; //나눗셈은 현재는 미사용
+
+let opr_ran;
+let opr;
+let lv = 3;
 // 문제 html 단
 let num1 = document.querySelector(".num1");
 let num2 = document.querySelector(".num2");
+let op = document.querySelector(".op");
 
+let time_text  = document.querySelector(".time_text");
+let time = 10;
 // 문제 back단
 let Q1 ,Q2;
 let cor;
@@ -21,20 +28,85 @@ let user;
 btn3.textContent = 7;
 
 
+function operator(){
+    opr_ran = Math.floor(Math.random()*lv);
+}
+
+function Quiz(Q1,Q2,lv){
+    op.textContent = opr_array[opr_ran];
+
+    if(opr_array[opr_ran]=="+"){
+        return Q1+Q2;
+    }else if(opr_array[opr_ran]=="-"){
+        return Q1-Q2;
+    }else if(opr_array[opr_ran]=="*"){
+        return Q1*Q2;
+    }
+    // else{
+
+    //     return Math.floor(Q1/Q2);
+    // }
+}
 
 function game(){
-    Q1 = Math.floor(Math.random()*20+1);
-    Q2 = Math.floor(Math.random()*20+1);
-    cor = Q1+Q2;    //정답
+    setInterval(timer,1000);
+
+    time = 10;
+    
+    operator();
+
+    if(opr_array[opr_ran]=="+"||opr_array[opr_ran]=="-"){
+        Q1 = Math.floor(Math.random()*20+1);
+        Q2 = Math.floor(Math.random()*20+1);
+    }else if(opr_array[opr_ran]=="*"){
+        Q1 = Math.floor(Math.random()*9+1);
+        Q2 = Math.floor(Math.random()*9+1);
+    }
+    
+    while(1){
+        if(Q1>=Q2){
+            break;
+        }
+        Q2 = Math.floor(Math.random()*20+1);
+    }
+    cor = Quiz(Q1,Q2,lv);
+     
     btn_array[0] = cor; //정답 랜덤으로 나오게 하기 위해 먼저 배열에 넣음.
     num1.textContent = Q1;
     num2.textContent = Q2;    
+    
 }
 
+let timer = setInterval(function(){
+    if(time>=1){
+        time = time - 1;
+            
+    }
+    time_text.textContent = time;
+    if(time==0){
+        alert("아웃\n 정답은"+cor);
+
+        clearInterval(timer);
+    }
+},1000);
+    
+   
+   
+
+    
+
+
 function btnValue(){
+    
     for(let i=1;i<3;){
-        btn_num1 = Math.floor(Math.random()*20+1);
-        btn_num2 = Math.floor(Math.random()*20+1);
+        if(opr_array[opr_ran]=="+"){
+            btn_num1 = Math.floor(Math.random()*20+1);
+            btn_num2 = Math.floor(Math.random()*20+1);
+        }else if(opr_array[opr_ran]=="-"||opr_array[opr_ran]=="*"){
+            btn_num1 = Math.abs(Q1-Math.floor(Math.random()*9+1));
+            btn_num2 =  Math.abs(Q2-Math.floor(Math.random()*9+1));
+        }
+
         if(cor!=btn_num1+btn_num2 && btn_num1+btn_num2 !=btn_array[i-1]){
             btn_array[i] = btn_num1 + btn_num2;
             i++;
@@ -78,7 +150,7 @@ function compare(user){
         console.log(typeof(user)+"문제타입"+typeof(cor));
         console.log("정답"+cor+"유저선택"+user);
     }else{
-        alert("오답");
+        alert("오답\n 정답은"+cor);
         
         console.log(typeof(user)+"문제타입"+typeof(cor));
         console.log("정답"+cor+"유저선택"+user);

@@ -13,9 +13,19 @@ html,body{
     height: 100%;
     width: 500px;
     margin: 0 auto;
+    z-index: 1;
+}
+
+.container.main_content{
     background-color: rgb(112, 101, 101);
     display: flex;
     flex-direction: column;
+    z-index: -999;
+}
+
+.container.reset{
+    background: red;
+    z-index: 999;
 }
 
 .container header{
@@ -46,6 +56,21 @@ html,body{
     flex-direction: column; 
 }
 
+.container .content .time_text{
+    border-radius: 50%;
+    font-size: 0.7em;
+    font-weight: bold;
+    border: 2px solid red;
+    text-align: center;
+    width: 6rem;
+    height: 6rem;
+    line-height: 6rem;
+    margin-left: 7px;
+    /* background: ; */
+    position: fixed;
+    top: 5.5rem;
+    /* left: 10; */
+}
 
 .container .content .Quiz{
     width: 60%;
@@ -53,7 +78,7 @@ html,body{
     flex-direction: row;
     justify-content: space-around;
     text-align: center;
-    margin: 0 auto;
+    margin: 1.5rem auto;
     border: 1px solid blue;
 }
 
@@ -79,4 +104,11 @@ html,body{
 
 .container .content .select .btn3{
     border: 3px solid rgb(124, 235, 148);
+}
+
+@media screen and (max-width:768px) {
+    .container{
+        width: 100%;
+        background-color: rgb(81, 113, 182);
+    }   
 }
