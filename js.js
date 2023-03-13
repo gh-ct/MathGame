@@ -119,8 +119,6 @@ function btnValue(){
     btn2.textContent = btn_array[1];
     btn3.textContent = btn_array[2];
 
-    // console.log("답:"+typeof(cor));
-    // console.log("문제:"+typeof(btn_array[0]));
 }
 
 
@@ -147,13 +145,8 @@ btn3.addEventListener("click",function(){
 function compare(user){
     if(user==cor){
         alert("정답");
-        console.log(typeof(user)+"문제타입"+typeof(cor));
-        console.log("정답"+cor+"유저선택"+user);
     }else{
         alert("오답\n 정답은"+cor);
-        
-        console.log(typeof(user)+"문제타입"+typeof(cor));
-        console.log("정답"+cor+"유저선택"+user);
     }
 }
 
@@ -164,11 +157,3 @@ btnValue();
 function shuffle(array) {
     array.sort(() => Math.random() - 0.5);
   }
-/*
-남은거
-O 1. 배열 랜덤으로 섞기
-O 2. 문제 기본적인거 잘나오는지 확인
-3. 연산에 따라 나오게 변경 난이도에 따라 다르게
-4. 타이머
-
-*/
